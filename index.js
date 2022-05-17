@@ -9,7 +9,7 @@ function initMap() {
     zoom: 8,
   });
 
-  const marker = new google.map.Marker({
+  const marker = new google.maps.Marker({
     position: dnepr,
     map: map
   })
