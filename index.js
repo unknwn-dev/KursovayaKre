@@ -33,7 +33,7 @@ function initMap() {
     zoom: 8,
   });
 
-  ExcelToJSON.parseExcel("./data.xls");
+  xlsParse("./data.xls");
 }
 
 window.initMap = initMap;
