@@ -38,7 +38,7 @@ function initMap() {
     zoom: 8,
   });
 
-  ExcelToJSON.parseExcel("data.xls")
+  ExcelToJSON.ExcelToJSON.parseExcel("data.xls")
 }
 
 window.initMap = initMap;
