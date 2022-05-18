@@ -1,33 +1,28 @@
 let map;
 
-var ExcelToJSON = function() {
-
-  this.parseExcel = function(file) {
+var xlsParse = function(fileName){
+    // Create A File Reader HTML5
     var reader = new FileReader();
 
+    // Ready The Event For When A File Gets Selected
     reader.onload = function(e) {
-      var data = e.target.result;
-      var workbook = XLSX.read(data, {
-        type: 'binary'
-      });
+        var data = e.target.result;
+        var cfb = XLS.CFB.read(data, {type: 'binary'});
+        var wb = XLS.parse_xlscfb(cfb);
+        // Loop Over Each Sheet
+        wb.SheetNames.forEach(function(sheetName) {
+            // Obtain The Current Row As CSV
+            var sCSV = XLS.utils.make_csv(wb.Sheets[sheetName]);   
+            var oJS = XLS.utils.sheet_to_row_object_array(wb.Sheets[sheetName]);   
 
-      workbook.SheetNames.forEach(function(sheetName) {
-        // Here is your object
-        var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-        var json_object = JSON.stringify(XL_row_object);
-        console.log(json_object);
-
-      })
-
+            $("#my_file_output").html(sCSV);
+            console.log(oJS)
+        });
     };
 
-    reader.onerror = function(ex) {
-      console.log(ex);
-    };
-
-    reader.readAsBinaryString(file);
-  };
-};
+    // Tell JS To Start Reading The File.. You could delay this if desired
+    reader.readAsBinaryString(oFile);
+}
 
 function initMap() {
 
@@ -38,7 +33,7 @@ function initMap() {
     zoom: 8,
   });
 
-  ExcelToJSON.parseExcel("data.xls");
+  ExcelToJSON.parseExcel("./data.xls");
 }
 
 window.initMap = initMap;
