@@ -1,39 +1,31 @@
 let map;
-
-var xlsParse = function(fileName){
-    // Create A File Reader HTML5
-    var reader = new FileReader();
-
-    // Ready The Event For When A File Gets Selected
-    reader.onload = function(e) {
-        var data = e.target.result;
-        var cfb = XLS.CFB.read(data, {type: 'binary'});
-        var wb = XLS.parse_xlscfb(cfb);
-        // Loop Over Each Sheet
-        wb.SheetNames.forEach(function(sheetName) {
-            // Obtain The Current Row As CSV
-            var sCSV = XLS.utils.make_csv(wb.Sheets[sheetName]);   
-            var oJS = XLS.utils.sheet_to_row_object_array(wb.Sheets[sheetName]);   
-
-            $("#my_file_output").html(sCSV);
-            console.log(oJS)
-        });
-    };
-
-    // Tell JS To Start Reading The File.. You could delay this if desired
-    reader.readAsBinaryString(oFile);
-}
-
+var numOfPoints = 5;
 function initMap() {
 
   const dnepr = { lat: 48.4775495409843, lng: 35.02095581604529 }
+  const zone = { 
+    latMin: 48.4526,
+    latMax: 48.46859,
+    lngMin: 34.98936,
+    lngMax: 34.99
+  }
 
   const map = new google.maps.Map(document.getElementById("map"), {
     center: dnepr,
-    zoom: 8,
+    zoom: 1,
   });
 
-  xlsParse("./data.xls");
+  for(var i = 0; i < numOfPoints; i++){
+    new google.maps.Marker({
+      position : {
+        lat : Math.random * (zone.latMax - zone.latMin) + zone.latMin,
+        len : Math.random * (zone.lenMax - zone.lenMin) + zone.lenMin
+      },
+      map : map
+    });
+  }
+
 }
+
 
 window.initMap = initMap;
