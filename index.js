@@ -12,14 +12,14 @@ function initMap() {
 
   const map = new google.maps.Map(document.getElementById("map"), {
     center: dnepr,
-    zoom: 1,
+    zoom: 8,
   });
 
   for(var i = 0; i < numOfPoints; i++){
     new google.maps.Marker({
       position : {
         lat : Math.random * (zone.latMax - zone.latMin) + zone.latMin,
-        len : Math.random * (zone.lenMax - zone.lenMin) + zone.lenMin
+        lng : Math.random * (zone.lenMax - zone.lenMin) + zone.lenMin
       },
       map : map
     });
