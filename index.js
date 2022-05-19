@@ -16,10 +16,10 @@ function initMap() {
   });
 
   for(var i = 0; i < numOfPoints; i++){
-    new google.maps.Marker({
+    var point = new google.maps.Marker({
       position : {
         lat : Math.random() * (zone.latMax - zone.latMin) + zone.latMin,
-        lng : Math.random() * (zone.lenMax - zone.lenMin) + zone.lenMin
+        lng : Math.random() * (zone.lngMax - zone.lngMin) + zone.lngMin
       },
       map : map
     });
