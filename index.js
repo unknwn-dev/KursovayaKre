@@ -18,8 +18,8 @@ function initMap() {
   for(var i = 0; i < numOfPoints; i++){
     new google.maps.Marker({
       position : {
-        lat : Math.random * (zone.latMax - zone.latMin) + zone.latMin,
-        lng : Math.random * (zone.lenMax - zone.lenMin) + zone.lenMin
+        lat : Math.random() * (zone.latMax - zone.latMin) + zone.latMin,
+        lng : Math.random() * (zone.lenMax - zone.lenMin) + zone.lenMin
       },
       map : map
     });
